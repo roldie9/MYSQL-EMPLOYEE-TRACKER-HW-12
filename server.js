@@ -20,14 +20,14 @@ function employees() {
     inquirer.prompt ({
         name: "launch",
         type: "list",
-        message: "Welcome to the employee tracker database. What are you trying to do?",
+        message: "What would you like to do?",
         choices: [
             "View all employees",
             "View departments",
             "View roles",
             "Add an employee",
             "Add department",
-            "Add a role",
+            "Add role",
             "Exit."
         ]
     }).then(function(answer) {
@@ -47,7 +47,7 @@ function employees() {
             case "Add department":
                 addDepartment();
                 break;
-            case "Add a role":
+            case "Add role":
                 addRole();
                 break;
             case "Exit.":
