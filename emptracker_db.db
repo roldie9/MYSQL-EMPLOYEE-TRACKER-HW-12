@@ -29,3 +29,5 @@ CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id)
 SELECT * FROM department;
 SELECT * FROM role;
 SELECT * FROM employee;
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
