@@ -1,0 +1,23 @@
+INSERT INTO department (name)
+VALUES ("Sales"), ("Customer Service"), ("Supervisor"), ("Human Resources"), ("Big Boss");
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("Shoe Sales", 20000, 1), /* 1 */
+         ("Suit Sales", 20000, 1), /* 2 */
+         ("Shoe Shiner", 10000, 2), /* 3 */
+         ("Cashier", 10000, 2), /* 4 */
+         ("Head Supervisor", 25000, 3), /* 5 */
+         ("HR Head", 30000, 4), /* 6 */
+         ("VP Sales", 50000, 5), /* 7 */
+         ("Creative Director", 100000, 5); /* 8 */
+        
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Cristiano", "Ronaldo", 5, null), 
+        ("Zinedine", "Zidane", 4, null),
+        ("Karim", "Benzema", 1, null),
+        ("Raul", "Gonzalez", 2, null),
+        ("Sergio", "Ramos", 3, null),
+        ("Gareth", "Bale", 1, null), 
+        ("Luka", "Modric", 2, null),
+        ("Florentino", "Perez", 5, null);
