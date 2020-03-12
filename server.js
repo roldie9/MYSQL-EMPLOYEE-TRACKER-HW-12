@@ -28,6 +28,7 @@ function employees() {
             "Add an employee",
             "Add department",
             "Add role",
+            "Update Employee Role",
             "Exit."
         ]
     }).then(function(answer) {
@@ -49,6 +50,9 @@ function employees() {
                 break;
             case "Add role":
                 addRole();
+                break;
+            case "Update Employee Role":
+                updateEmpRole();
                 break;
             case "Exit.":
                 endEmployees();
@@ -216,6 +220,62 @@ function addRole() {
         })
     })
 }
+
+function updateEmpRole() {
+    connection.query("SELECT * FROM employee", function(err, res) {
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name: "update_role",
+                type: "list",
+                message: "Which employee's role is changing?",
+                choices: function() {
+                    let employeeList = [];
+                        res.forEach(result => {
+                            employeeList.push(result.last_name);
+                        })
+                        return employeeList;
+                }
+            }
+        ]).then(function(answer) {
+            console.log(answer);
+            const name = answer.update_role;
+            },
+        
+            connection.query("SELECT * FROM role", function(err, res) {
+                    inquirer.prompt([
+                        {
+                            name: "role",
+                            type: "list",
+                            message: "What is their new role?",
+                            choices: function() {
+                                roleList = [];
+                                res.forEach(res => {
+                                    roleList.push(res.title)
+                                })
+                                return roleList;
+                            }
+                        }
+                    ]).then(function(newRole) {
+                        const role = newRole.role;
+                        console.log(newRole.role);
+                    connection.query("SELECT FROM role WHERE title = ?", [role], function(err, res) {
+                        if (err) throw err;
+                        let roleID = res [0].id;
+                        let query = "UPDATE employee SET role_id ? WHERE last_name ?";
+                        let values = [roleID, name]
+                        console.log(values);
+                        connection.query(query, values, function(err, res, fields) {
+                            console.log("You have updated ${name}'s role to ${role}.")
+                        })
+                        employees();
+                    }
+                )
+            })
+            }))
+    })
+}
+
 function endEmployees() {
     connection.end();
 }
