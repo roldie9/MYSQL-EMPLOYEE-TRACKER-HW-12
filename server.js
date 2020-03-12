@@ -159,7 +159,8 @@ function addDepartment() {
         let query = "SELECT * FROM department";
         connection.query(query, function(err, res) {
             if(err)throw err;
-            console.table('All Departments:', res);
+            console.log(query);
+            console.table(res);
             employees();
         })
     })
@@ -181,7 +182,8 @@ function addRole() {
             },
             {
                 name: "departmentChoice",
-                type: "fullList",
+                type: "rawlist",
+                message: "Choose a department.",
                 choices: function() {
                     let deptList = [];
                     for (let i = 0; i < res.length; i++) {
