@@ -20,7 +20,7 @@ function employees() {
     inquirer.prompt ({
         name: "launch",
         type: "list",
-        message: "Welcome to the employee database. What are you trying to do?",
+        message: "Welcome to the employee tracker database. What are you trying to do?",
         choices: [
             "View all employees",
             "View departments",
@@ -63,8 +63,8 @@ function viewEmployees() {
     let query = "SELECT * FROM employee";
     connection.query(query, function(err, res) {
         if (err) throw err;
-        console.log(res.length + " employees found!");
-        console.table('All Employees:', res);
+        console.log(query);
+        console.table(res);
         employees();
     })
 }
@@ -73,7 +73,8 @@ function viewDepartments() {
     let query = "SELECT * FROM department";
     connection.query(query, function(err, res) {
         if(err)throw err;
-        console.table('All Departments:', res);
+        console.log(query)
+        console.table(res);
         employees();
     })
 }
@@ -82,7 +83,8 @@ function viewRoles() {
     let query = "SELECT * FROM role";
     connection.query(query, function(err, res){
         if (err) throw err;
-        console.table('All roles:', res);
+        console.log(query)
+        console.table(res);
         employees();
     })
 }
@@ -132,6 +134,7 @@ function addEmployee() {
                 function (err) {
                     if (err) throw err;
                     console.log("Congrats! The new employee has been added.");
+                    addEmployee();
                     employees();
                 }
             )
