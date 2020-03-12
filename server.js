@@ -239,7 +239,7 @@ function updateEmpRole() {
             }
         ]).then(function(answer) {
             console.log(answer);
-            const name = answer.update_role;
+            let name = answer.update_role;
             },
         
             connection.query("SELECT * FROM role", function(err, res) {
